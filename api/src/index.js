@@ -12,7 +12,7 @@ const Cat = mongoose.model('Cat', { name: String, age: Number, time: Date });
 const app = express();
 
 app.get('/', (req, res) => {
-  res.send('Hello World =))');
+  res.send('Hello World )');
 });
 
 app.get('/cats', async (req, res) => {

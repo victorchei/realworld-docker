@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  api:
+    restart: always
+    command: "npm run dev"      
+    ports:
+      - "3001:3001"    
+    volumes: 
+     - ./api/src:/usr/src/app/src
