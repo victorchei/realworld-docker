@@ -1,18 +1,18 @@
-FROM node:18-alpine
+FROM node:16-alpine3.15
 
-# создание директории приложения
+# Create app directory
 WORKDIR /usr/src/app
 
-# установка зависимостей
-# символ астериск ("*") используется для того чтобы по возможности
-# скопировать оба файла: package.json и package-lock.json
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 COPY package*.json ./
 
 RUN npm install
-# Если вы создаете сборку для продакшн
+# If you are building your code for production
 # RUN npm ci --only=production
 
-# копируем исходный код
+# Bundle app source
 COPY . .
 
 EXPOSE 3001

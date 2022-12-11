@@ -1,10 +1,26 @@
-version: '3.9'
+version: "3.9"
 services:
+  nginx:
+    image: nginx:latest
+    container_name: real-world-docker-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - frontend
+      - api
+
+  frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile.prod
+    command: serve -s build -l 3000
+    depends_on:
+      - api
   api:
     build: api
-    command: "npm run start"      
-    ports:
-      - "3001:3001"
+    command: "npm run start"
     environment:
       PORT: 3001
       HOST: 127.0.0.1
@@ -13,7 +29,7 @@ services:
       - api_db
   api_db:
     image: "mongo:latest"
-    volumes: 
-     - mongodb_api:/data/db
-volumes: 
-  mongodb_api: 
+    volumes:
+      - mongodb_api:/data/db
+volumes:
+  mongodb_api:
