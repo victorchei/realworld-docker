@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   nginx:
-    image: nginx:latest
+    image: nginx:1-alpine
     container_name: real-world-docker-nginx
     ports:
       - "80:80"
