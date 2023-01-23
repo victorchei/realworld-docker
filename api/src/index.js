@@ -8,7 +8,7 @@ const PORT = process.env.PORT;
 const HOST = process.env.HOST;
 const MONGO_URL = process.env.MONGO_URL;
 
-const User = mongoose.model('User', { name: String, age: Number });
+const User = mongoose.model('User', { name: String, date: String });
 
 // App
 const app = express();
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get("/user", async (req, res) => {
     try {
-        const user = new User({name: "Alex K", age: 41});
+        const user = new User({name: "user session", date: new Date});
         await user.save();
         const users = await User.find();
         res.json(users);
